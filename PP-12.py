@@ -1,26 +1,27 @@
-list1=[]
-ques=int(input("How many elements would you like to add? : "))
-for i in range (0,ques):
-    element=int(input("Enter a number: "))
+list1 = []
+
+ques = int(input("How many elements would you like to add? : "))
+for i in range(ques):
+    element = int(input("Enter a number: "))
     list1.append(element)
 
-old_element=int(input("Enter the element you want to delete: "))
-list1.remove(old_element)
+print("Current list:", list1)
 
-ques=int(input("How many element would you like to replace? : "))
+old_element = int(input("Enter the element you want to replace: "))
 if old_element in list1:
-    element = int(input("Enter the new element you want to add: "))
-    index=0
-    for i in list1:
-        if i==old_element:
-            break
-        else:
-            index= index+1
-            element=int(input("Enter an element to replace: "))
-        mylist
-        list1.pop(i)
-        list1.insert(i,element)
+    new_element = int(input("Enter the new element you want to add: "))
+    index = list1.index(old_element)
+    list1[index] = new_element
+    print("List after replacement:", list1)
+else:
+    print("That element is not in the list.")
+
+del_element = int(input("Enter the element you want to delete: "))
+if del_element in list1:
+    list1.remove(del_element)
+    print("List after deletion:", list1)
+else:
+    print("That element is not in the list to delete.")
 
 list1.sort()
-
-print(list1)
+print("\nFinal sorted list:", list1)
