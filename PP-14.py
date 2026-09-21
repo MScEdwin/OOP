@@ -1,16 +1,37 @@
 mycourses = {}
-while (1):
-    print("Digit 1 if you want to insert new elements:")
-    print("Digit 2 if you want to replace new elements:")
-    print("Digit 3 if you want to delete new elements:")
-    print("Digit 4 if you want to print elements:")
-    print("Digit 4 if you want to exit:")
-    choice = int(input("Enter your choice: "))
+while True:
+    print("1. Insert new elements")
+    print("2. Replace an element")
+    print("3. Delete an element")
+    print("4. Print elements")
+    print("5. Exit")
 
+    choice = int(input("Enter your choice: "))
     if choice == 1:
-        ques= int(input("How many elements would you like to add? "))
-        for i in range (0,ques):
-            name = "c_name",i
-            cousename= input("Enter course name: ")
-            mycourses.update({name:cousename})
-    print(mycourses)
+        ques = int(input("How many elements would you like to add? "))
+        for i in range(ques):
+            key = input("Enter course code/key (e.g., CS101): ")
+            coursename = input("Enter course name: ")
+            mycourses[key] = coursename
+    elif choice == 2:
+        key = input("Enter the course code/key you want to replace: ")
+        if key in mycourses:
+            new_coursename = input("Enter the new course name: ")
+            mycourses[key] = new_coursename
+            print("Course updated successfully.")
+        else:
+            print("Error: Course key not found.")
+    elif choice == 3:
+        key = input("Enter the course code/key you want to delete: ")
+        if key in mycourses:
+            mycourses.pop(key)
+            print("Course deleted successfully.")
+        else:
+            print("Error: Course key not found.")
+    elif choice == 4:
+        print(mycourses)
+    elif choice == 5:
+        print("Thank you for using this program")
+        break
+    else:
+        print("Invalid choice. Please select a number between 1 and 5.")
