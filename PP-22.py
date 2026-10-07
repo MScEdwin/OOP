@@ -1,96 +1,172 @@
 class Faculty:
     def __init__(self):
-        self.teacher = ""
-        self.id = ""
-        
+        self.name = ""
+        self.id = 0
+        self.experience = ""
+        self.department = ""
+        self.course = ""
+        self.student_list = []
+
     def new_faculty(self):
-        self.advisor = input("Enter your teacher: ")
-        self.id = input("Enter your id: ")
+        self.id = int(input("Enter faculty ID: "))
+        self.name = input("Enter faculty name: ")
+        self.experience = int(input("Enter years of experience: "))
+        self.department = input("Enter department: ")
+        self.course = input("Enter course taught: ")
 
-    def enroll(self):
-        self.name = input("Enter your name: ")
-        self.id = input("Enter your id number: ")
+    def enroll_students(self, student_obj):
+        self.student_list.append(student_obj)
+        print(f"Student {student_obj.name} enrolled under faculty {self.name}")
 
-class Student:
+    def display_faculty(self):
+        print("---Faculty info---")
+        print("ID:", self.id)
+        print("name:", self.name)
+        print("experience:", self.experience, "years.")
+        print("department:", self.department)
+        print("course:", self.course)
+        for i in self.student_list:
+            print ("Assigned student "+str(i), i.name )
+
+class Students:
     def __init__(self):
         self.name = ""
-        self.id = ""
-        self.department = ""
+        self.id = 0
         self.major = ""
+        self.department = ""
+        self.advisor = ""
 
     def new_student(self):
-        self.name = input("Enter your name: ")
-        self.id = input("Enter your id number: ")
-        self.department = input("Enter your department: ")
-        self.major = input("Enter your major: ")
+        self.name = input("Enter student name: ")
+        self.id = int(input("Enter student ID: "))
+        self.major = input("Enter major: ")
+        self.department = input("Enter department: ")
 
-    def assign_advisor(self):
-
-
+    def assign_advisor(self, faculty_object):
+        self.advisor = faculty_object.name
+        print ("The advisor:",faculty_object.name , "Has been assigned to the student", self.name)
 
     def display_student(self):
-        print("Name: " + self.name)
-        print("ID: " + self.id)
-        print("Department: " + self.department)
+        print("---Student info---")
+        print("name:", self.name)
+        print("ID:", self.id)
+        print("department:", self.department)
+        if self.advisor:
+            print("advisor:", self.advisor.name)
+        else:
+            print("Advisor: None")
 
-
-
-class Courses:
+class Course:
     def __init__(self):
-        self.course = ""
+        self.name = ""
+        self.department = ""
+        self.credits = 0
+        self.faculty = ""
+        self.students = []
 
     def new_course(self):
-        self.course = input("Enter your course: ")
+        self.name = input("Enter course name: ")
+        self.department = input("Enter department: ")
+        self.credits = int(input("Enter number of credits: "))
 
-    def assign_faculty(self):
+    def faculty_enroll(self, faculty_object):
+        self.faculty = faculty_object.name
+        print ("The course ", self.name, "Has been assigned to the faculty:", self.faculty)
 
-    def register_student(self):
+    def enroll_students(self, student_obj):
+        self.students.append(student_obj)
+        print("The student ", student_obj.name, "Has been added to the course:", self.name)
+
+    def display_courses(self):
+        print("---Course info---")
+        print("name:", self.name)
+        print("department:", self.department)
+        print("credits:", self.credits)
+        if self.faculty:
+            print("faculty:", self.faculty)
+        else :
+            print("Faculty: None")
+        for f in self.students:
+            print ("Students in course"+str(f), f.name )
 
 
 
+myStudentsList= []
+myFacultyList = []
+myCourseList = []
 
+stu = Students()
+stu.new_student()
+myStudentsList.append(stu)
 
+fac = Faculty()
+fac.new_faculty()
+myFacultyList.append(fac)
 
+crs = Course()
+crs.new_course()
+myCourseList.append(crs)
 
+stu.assign_advisor(fac)
+fac.enroll_students(stu)
+crs.faculty_enroll(fac)
+crs.enroll_students(stu)
 
+print("5.Display info")
+stu.display_student()
+fac.display_faculty()
+crs.display_courses()
 
-mystudent = []
-myfaculty = []
-mycourses = []
+while True:
+    print ("1. Add a student")
+    print ("2. Add a faculty")
+    print ("3. Add a course")
+    print ("4. Assign a course to a student")
+    print ("5. Assign advisor to a Student")
+    print ("6. Enroll a student in a Faculty")
+    print ("7. Enroll a course in a Faculty")
+    print ("8. Display info")
+    print ("9. Exit")
+    choice = int(input("Enter your choice: "))
 
-fa=int(input("How many faculties do you want to create"))
-for i in range(fa):
-    fac = Faculty()
-    fac.new_faculty()
-    myfaculty.append(fac)
-
-st=int(input("How many students do you want to create"))
-for i in range(st):
-    stu = Student()
-    stu.new_student()
-    faculty_id=int(input("Enter the faculty id number: "))
-    if faculty_id in myfaculty:
-        stu.assign_advisor(faculty_id)
-        mystudent.append(stu)
+    if choice == 1:
+        stu = Students()
+        stu.new_student()
+        myStudentsList.append(stu)
+    elif choice == 2:
+        fac = Faculty()
+        fac.new_faculty()
+        myFacultyList.append(fac)
+    elif choice == 3:
+        crs = Course()
+        crs.new_course()
+        myCourseList.append(crs)
+    elif choice == 4:
+        crs.enroll_students(stu)
+    elif choice == 5:
+        stu.assign_advisor(fac)
+    elif choice == 6:
+        crs.faculty_enroll(fac)
+    elif choice == 7:
+        crs.enroll_students(stu)
+    elif choice == 8:
+        print ("1. Display Students")
+        print ("2. Display Faculty")
+        print ("3. Display Courses")
+        choice2= int(input("Enter your choice: "))
+        if choice2 == 1:
+            stu.display_student()
+        elif choice2 == 2:
+            fac.display_faculty()
+        elif choice2 == 3:
+            crs.display_courses()
+        else:
+            print ("Invalid choice")
+    elif choice == 9:
+        print ("Thanks for using the program")
     else:
-        break
+        print ("Please enter a valid choice")
 
-co=int(input("How many courses do you want to create"))
-for i in range(co):
-    cou = Courses()
-    cou.new_course()
-    faculty_id=int(input("Enter the faculty id number: "))
-    if faculty_id in myfaculty:
-        cou.assign_faculty(faculty_id)
-        mystudent.append(cou)
-    else:
-        print("Does not exist")
-    student_id=int(input("Enter the student id number: "))
-    if student_id in mystudent:
-        cou.register_student(student_id)
-        mycourses.append(cou)
-    else:
-        print("Does not exist")
 
 
 
