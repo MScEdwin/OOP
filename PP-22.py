@@ -91,32 +91,13 @@ class Course:
 
 
 
+
 myStudentsList= []
 myFacultyList = []
 myCourseList = []
-
 stu = Students()
-stu.new_student()
-myStudentsList.append(stu)
-
 fac = Faculty()
-fac.new_faculty()
-myFacultyList.append(fac)
-
 crs = Course()
-crs.new_course()
-myCourseList.append(crs)
-
-stu.assign_advisor(fac)
-fac.enroll_students(stu)
-crs.faculty_enroll(fac)
-crs.enroll_students(stu)
-
-print("5.Display info")
-stu.display_student()
-fac.display_faculty()
-crs.display_courses()
-
 while True:
     print ("1. Add a student")
     print ("2. Add a faculty")
@@ -130,15 +111,12 @@ while True:
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
-        stu = Students()
         stu.new_student()
         myStudentsList.append(stu)
     elif choice == 2:
-        fac = Faculty()
         fac.new_faculty()
         myFacultyList.append(fac)
     elif choice == 3:
-        crs = Course()
         crs.new_course()
         myCourseList.append(crs)
     elif choice == 4:
@@ -153,6 +131,7 @@ while True:
         print ("1. Display Students")
         print ("2. Display Faculty")
         print ("3. Display Courses")
+        print ("4. Display all info")
         choice2= int(input("Enter your choice: "))
         if choice2 == 1:
             stu.display_student()
@@ -160,6 +139,13 @@ while True:
             fac.display_faculty()
         elif choice2 == 3:
             crs.display_courses()
+        elif choice2 == 4:
+            for s in myStudentsList:
+                s.display_student()
+            for f in myFacultyList:
+                f.display_faculty()
+            for c in myCourseList:
+                c.display_course()
         else:
             print ("Invalid choice")
     elif choice == 9:
