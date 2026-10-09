@@ -5,18 +5,21 @@ class Book_class:
         self.author_id = 0
         self.publisher = ""
         self.year_of_publication = 0
+
     def add_book(self):
         self.book_id = int(input("Enter book ID: "))
         self.book_title = input("Enter book title: ")
         self.author_id = int(input("Enter author ID: "))
         self.publisher = input("Enter publisher: ")
         self.year_of_publication = int(input("Enter year of publication: "))
+
     def display_book(self):
         print("Book ID:", self.book_id)
         print("Title:", self.book_title)
         print("Author ID:", self.author_id)
         print("Publisher:", self.publisher)
         print("Year of Publication:", self.year_of_publication)
+
 
 class Author_class:
     def __init__(self):
@@ -26,6 +29,7 @@ class Author_class:
         self.country = ""
         self.phone = ""
         self.emailid = ""
+
     def add_author(self):
         self.author_id = int(input("Enter author ID: "))
         self.author_name = input("Enter author name: ")
@@ -33,6 +37,7 @@ class Author_class:
         self.country = input("Enter country: ")
         self.phone = input("Enter phone number: ")
         self.emailid = input("Enter email ID: ")
+
     def display_author(self):
         print("Author ID:", self.author_id)
         print("Name:", self.author_name)
@@ -40,6 +45,7 @@ class Author_class:
         print("Country:", self.country)
         print("Phone:", self.phone)
         print("Email:", self.emailid)
+
 
 class User_class:
     def __init__(self):
@@ -49,6 +55,7 @@ class User_class:
         self.address = ""
         self.phone = ""
         self.emailid = ""
+
     def add_user(self):
         self.user_id = int(input("Enter user ID: "))
         self.name = input("Enter user name: ")
@@ -57,6 +64,7 @@ class User_class:
         self.phone = input("Enter phone number: ")
         self.emailid = input("Enter email ID: ")
         self.bookborrowed = []
+
     def display_user(self):
         print("--- User Info ---")
         print("User ID:", self.user_id)
@@ -65,7 +73,7 @@ class User_class:
         print("Phone:", self.phone)
         print("Email:", self.emailid)
         for i in len(self.bookborrowed):
-            print (i.bookborrowed)
+            print(i.bookborrowed)
 
 
 myBookList = []
@@ -81,24 +89,29 @@ while True:
     print("6. Exit")
     choice = int(input("Enter choice: "))
     if choice == 1:
-        bo=Book_class()
+        bo = Book_class()
         bo.add_book()
         myBookList.append(bo)
     elif choice == 2:
-        au=Author_class()
+        au = Author_class()
         au.add_author()
         myAuthorList.append(au)
     elif choice == 3:
-        u=User_class()
+        u = User_class()
         u.add_user()
         myUserList.append(u)
     elif choice == 4:
-        for i, bo in enumerate(myBookList):
-            print(i+1, bo.book_id)
-        choice_bo=int(input("Enter choice: "))
-        bo = myBookList[choice_bo - 1]
-        
+        for i, u in enumerate(myUserList):
+            print(f"{i + 1}. {u.name}")
+        u_choice = int(input("Enter user number: "))
+        selected_u = myUserList[u_choice - 1]
 
+        print("\nSelect Book to Borrow:")
+        for i, b in enumerate(myBookList):
+            print(f"{i + 1}. {b.id, b.title}")
+        b_choice = int(input("Enter book number: "))
+        selected_book = myBookList[b_choice - 1]
+        selected_u.borrow_book(selected_book)
     elif choice == 5:
         print("1. Display Books")
         print("2. Display Authors")
@@ -135,27 +148,6 @@ while True:
         break
     else:
         print("Invalid choice")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
