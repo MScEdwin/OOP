@@ -55,6 +55,7 @@ class User_class:
         self.address = ""
         self.phone = ""
         self.emailid = ""
+        self.bookborrowed = []
 
     def add_user(self):
         self.user_id = int(input("Enter user ID: "))
@@ -65,6 +66,10 @@ class User_class:
         self.emailid = input("Enter email ID: ")
         self.bookborrowed = []
 
+    def borrow_book(self, book_obj):
+        self.bookborrowed.append(book_obj)
+        print(f"Book '{book_obj.book_title}' successfully borrowed ")
+
     def display_user(self):
         print("--- User Info ---")
         print("User ID:", self.user_id)
@@ -72,8 +77,9 @@ class User_class:
         print("Address:", self.address)
         print("Phone:", self.phone)
         print("Email:", self.emailid)
-        for i in len(self.bookborrowed):
-            print(i.bookborrowed)
+        for b in self.bookborrowed:
+            print(f" - ID: {b.book_id}, Title: {b.book_title}")
+
 
 
 myBookList = []
@@ -106,9 +112,9 @@ while True:
         u_choice = int(input("Enter user number: "))
         selected_u = myUserList[u_choice - 1]
 
-        print("\nSelect Book to Borrow:")
+        print("Select Book to Borrow:")
         for i, b in enumerate(myBookList):
-            print(f"{i + 1}. {b.id, b.title}")
+            print(f"{i + 1}. {b.book_id, b.book_title}")
         b_choice = int(input("Enter book number: "))
         selected_book = myBookList[b_choice - 1]
         selected_u.borrow_book(selected_book)
