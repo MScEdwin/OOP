@@ -1,0 +1,94 @@
+import random
+
+class User:
+    def __init__(self):
+        self.name = ""
+        self.age = 0
+        self.gender = ""
+        self.height = 0
+        self.weight = 0
+        self.id = 0
+        self.password = ""
+
+    def new_faculty(self):
+        self.name = input("Enter the user name: ")
+        self.id = random.randint(1, 100000000)
+        self.gender = input(
+
+
+
+        )
+        self.password = int(input("Digit your password: "))
+
+    def display_faculty(self):
+        print("---Faculty info---")
+        print("ID:", self.id)
+        print("name:", self.name)
+
+class Test:
+    def __init__(self):
+        self.push_up = ""
+        self. = 0
+        self.major = ""
+        self.department = ""
+        self.advisor = ""
+
+    def new_student(self):
+        self.name = input("Enter student name: ")
+        self.id = int(input("Enter student ID: "))
+        self.major = input("Enter major: ")
+        self.department = input("Enter department: ")
+
+    def assign_advisor(self, faculty_object):
+        self.advisor = faculty_object.name
+        print ("The advisor:",faculty_object.name , "Has been assigned to the student", self.name)
+
+    def display_student(self):
+        print("---Student info---")
+        print("name:", self.name)
+        print("ID:", self.id)
+        print("department:", self.department)
+        if self.advisor:
+            print("advisor:", self.advisor)
+        else:
+            print("Advisor: None")
+
+class Course:
+    def __init__(self):
+        self.name = ""
+        self.department = ""
+        self.credits = 0
+        self.faculty = ""
+        self.students = []
+
+    def new_course(self):
+        self.name = input("Enter course name: ")
+        self.department = input("Enter department: ")
+        self.credits = int(input("Enter number of credits: "))
+
+    def faculty_enroll(self, faculty_object):
+        self.faculty = faculty_object.name
+        print ("The course ", self.name, "Has been assigned to the faculty:", self.faculty)
+
+    def enroll_students(self, student_obj):
+        self.students.append(student_obj)
+        print("The student ", student_obj.name, "Has been added to the course:", self.name)
+
+    def display_courses(self):
+        print("---Course info---")
+        print("name:", self.name)
+        print("department:", self.department)
+        print("credits:", self.credits)
+        if self.faculty:
+            print("faculty:", self.faculty)
+        else :
+            print("Faculty: None")
+        for f in self.students:
+            print ("Students in course"+str(f), f.name )
+
+
+
+
+myStudentsList= []
+myFacultyList = []
+myCourseList = []
