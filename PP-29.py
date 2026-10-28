@@ -6,17 +6,38 @@ top.geometry("350x600")
 
 answer = Text(top, height=10, width=40)
 answer.place(x=0, y=0)
+
+just_calculated = False
+
+
 def show(x):
+    global just_calculated
     try:
         if x == "=":
-            final_answer = eval(answer.get("1.0", "end-1c"))
-            answer.insert("1.0", final_answer)
-            answer.insert(tk.INSERT, x)
+            expression = answer.get("1.0", "end-1c")
+            result = eval(expression)
+
+            answer.delete("1.0", "end")
+            answer.insert("1.0", f"{expression}={result}")
+            just_calculated = True
         else:
+            # After showing a result, start a new calculation
+            if just_calculated:
+                answer.delete("1.0", "end")
+                just_calculated = False
             answer.insert(tk.INSERT, x)
     except:
         answer.delete("1.0", "end")
+        just_calculated = False
 
+
+def backspace():
+    global just_calculated
+    if just_calculated:
+        answer.delete("1.0", "end")
+        just_calculated = False
+    else:
+        answer.delete("end-2c", "end-1c")  # removes the last character
 
 
 B1= Button(top, text="1", width=10, height=5, command=lambda: show(1))
@@ -64,6 +85,9 @@ B12.place(x=240, y=425)
 B13= Button(top, text="/", width=10, height=5, command=lambda: show("/"))
 B13.place(x=160, y=425)
 
+# New: backspace button in the free space at the bottom
+B14= Button(top, text="⌫", width=43, height=3, command=backspace)
+B14.place(x=0, y=510)
 
 
 top.mainloop()
