@@ -1,4 +1,5 @@
 import mysql.connector
+
 def get_connection():
     conn = mysql.connector.connect(host="localhost", user="root", password="")
     cursor = conn.cursor()
@@ -27,12 +28,12 @@ def get_connection():
 
 
 class StudentMaster:
-    def __init__(self):
-        self.stu_id = 0
-        self.stu_name = ""
-        self.stu_major = ""
-        self.stu_courses = ""
-        self.stu_cgpa = ""
+    def __init__(self, stu_id= 0, stu_name="", stu_major="", stu_courses="", stu_cgpa=0):
+        self.stu_id = stu_id
+        self.stu_name = stu_name
+        self.stu_major = stu_major
+        self.stu_courses = stu_courses
+        self.stu_cgpa = stu_cgpa
 
     def enroll_student(self):
         self.stu_id = int(input("Enter student ID: "))
@@ -117,10 +118,9 @@ def main():
         print("2. Enroll Student")
         print("3. Display Faculty")
         print("4. Display Students")
-        print("5. Load 5 sample students and 5 sample faculty")
-        print("6. Exit")
+        print("5. Exit")
         choice = int(input("Enter your choice: "))
-    
+
         if choice == 1:
             fm = FacultyMaster()
             fm.enroll_faculty()
@@ -136,8 +136,6 @@ def main():
         elif choice == 4:
             display_students(conn)
         elif choice == 5:
-            load_sample_data(conn)
-        elif choice == 6:
             break
         else:
             print("Invalid choice.\n")
